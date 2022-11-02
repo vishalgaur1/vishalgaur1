@@ -4,7 +4,7 @@ Star this repo13101
 Fork on GitHub3408
 <h1 align="center">Hi 👋, I'm Vishal Gaur</h1>
 <h3 align="center">A passionate developer from India.</h3>
-
+(img align="right" alt="Coding" width="400" src="https://cdn.dribbble.com/users/116207...")
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=vishalgaur1&label=Profile%20views&color=0e75b6&style=flat" alt="vishalgaur1" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=vishalgaur1" alt="vishalgaur1" /></a> </p>
