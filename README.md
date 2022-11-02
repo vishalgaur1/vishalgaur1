@@ -1,6 +1,6 @@
-![MasterHead](https://1.bp.blogspot.com/-7A4WynwLsMw/XbBpCXG8fHI/AAAAAAAAMt4/uOa1bpLskYgrwGbllhSu2SDj_Mig8SXJQCLcBGAsYHQ/s1600/2000_600px.gif)
+![MasterHead]([https://1.bp.blogspot.com/-7A4WynwLsMw/XbBpCXG8fHI/AAAAAAAAMt4/uOa1bpLskYgrwGbllhSu2SDj_Mig8SXJQCLcBGAsYHQ/s1600/2000_600px.gif](https://miro.medium.com/max/1100/0*FGD6BUzzZs1VJLuY.gif))
 
-<h1 align="center">Hey 👋, I'm Prince Singh</h1>
+<h1 align="center">Hey 👋, I'm Vishal Gaur</h1>
 
 
 
@@ -12,7 +12,7 @@
 
 - 🌱 I’m currently learning *[Flutter](https://flutter.dev/)*
 
-- 📫 Reach me through *[My E-mail](mailto:princesingh3632@gmail.com)*
+- 📫 Reach me through *[My E-mail](mailto:vishalgaur2002@gmail.com)*
 
 - 📄 Know about my experiences from *[My Resume](https://drive.google.com/file/d/14j9UvRT0JGgQ_ndwtJG8Rl8h3TkPmhFn/view?usp=sharing)*
 
