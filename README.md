@@ -10,30 +10,29 @@
 <br>
 <br>
 
-- 🌱 I’m currently learning *[Flutter](https://flutter.dev/)*
+- 🌱 I’m currently learning **JavaScript**.
 
-- 📫 Reach me through *[My E-mail](mailto:vishalgaur2002@gmail.com)*
+- 📫 Reach me through *[My E-mail](https://mail.google.com/mail/vishalgaur2002@gmail.com)*
 
-- 📄 Know about my experiences from *[My Resume](https://drive.google.com/file/d/14j9UvRT0JGgQ_ndwtJG8Rl8h3TkPmhFn/view?usp=sharing)*
+- 📄 Know about my experiences from *[My Resume](https://drive.google.com/file/d/15EtifNYmpl553Sn7LoToBLaqPsuJ93Qh/view?usp=sharing)*
 
 <br>
 <br>
 <br>
 <p align="left">
-  <img src="https://komarev.com/ghpvc/?username=heyprincesingh&label=Profile%20views&color=0e75b6&style=flat" alt="Views Count" hspace="10"/> 
-  <img src="https://img.shields.io/github/followers/heyprincesingh?label=Followers&logo=GitHub&style=for-the-badge&style=flat" alt="Followers" /> 
+  <img src="https://komarev.com/ghpvc/?username=vishalgaur1&label=Profile%20views&color=0e75b6&style=flat" alt="Views Count" hspace="10"/> 
+  <img src="https://img.shields.io/github/followers/vishalgaur1?label=Followers&logo=GitHub&style=for-the-badge&style=flat" alt="Followers" /> 
 </p>
 
 ***
 <div align="left"><h2><img src="https://www.hugp.com/research/assets/img/gif/akushu.gif" width="40px"> Connect with me</h1> </div>
 
 <p align="left">
-<a href="https://linkedin.com/in/heyprincesingh" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
-<a href="https://www.leetcode.com/heyprincesingh" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
-<a href="https://www.codechef.com/users/heyprince" target="blank"><img align="center" src="https://github.com/ANURAG-PATHAK/ANURAG-PATHAK/blob/master/resources/codecheficon_adobespark.png" alt="heyprince" height="30" width="40" hspace="10"/></a>
-<a href="https://www.hackerrank.com/heyprincesingh" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
-<a href="https://fb.com/heyprincesingh" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
-<a href="https://instagram.com/heyprincesingh" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
+<a href="https://www.linkedin.com/in/vishalgaur1/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="vishalgaur1" height="30" width="40" hspace="10"/></a>
+<a href="https://leetcode.com/vishalgaur1/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="heyprincesingh" height="30" width="40" hspace="10"/></a>
+<a href="https://www.codechef.com/users/vishalgaur1" target="blank"><img align="center" src="https://github.com/ANURAG-PATHAK/ANURAG-PATHAK/blob/master/resources/codecheficon_adobespark.png" alt="vishalgaur1" height="30" width="40" hspace="10"/></a>
+<a href="https://www.hackerrank.com/vg1669" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="vg1669" height="30" width="40" hspace="10"/></a>
+<a href="https://www.facebook.com/profile.php?id=100080949340079" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="vishalgaur" height="30" width="40" hspace="10"/></a>
 </p>
 
 
@@ -45,25 +44,19 @@
 
 
 
->### Mobile App Development : <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40" hspace="10"/> </a>  <a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40" hspace="10"/> </a>  <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a>
-
-
 <img align="right" alt="Coding" src="http://www.stem2steameducation.com/wp-content/uploads/2018/10/book.gif" width="35%">
 
 
->### IDE : <a href="https://code.visualstudio.com" target="_blank" rel="noreferrer"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VsCode" width="40" height="40" hspace="10"/> <a href="https://developer.android.com/studio" target="_blank" rel="noreferrer"><img src="https://static.wikia.nocookie.net/logopedia/images/d/db/Android_Studio_Icon_2021.svg/revision/latest/scale-to-width-down/200?cb=20210305211354" alt="VsCode" width="40" height="40"/>  
+>### IDE : <a href="https://code.visualstudio.com" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white" alt="VsCode" width="125" height="35" hspace="10"/> <a href="https://jupyter.org/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter" width="125" height="35" hspace="10"/>
   
-  
-  
->### AI/ML : <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/>
 
 
 
->### Database : <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a>
+>### Database : <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="mysql" width="110" height="35"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" width="110" height="35"/> </a> <a href="https://www.oracle.com/in/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white" width="110" height="35"/> </a>
 
 
 
->### Backend as a Service : <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a>
+>### Backend as a Service : <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white" alt="firebase" width="110" height="35"/> </a>
 </p>
 
 
@@ -76,24 +69,24 @@
 
 <div align="left"><h2>🏆 Github Trophy</h2>
 
-<p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=heyprincesingh&column=-1" alt="heyprincesingh" /></a> </p>
+<p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=vishalgaur1&column=-1" alt="heyprincesingh" /></a> </p>
 
-***
+<!--***
 <div align="left"><h2>✨ Holopins</h2>
 
-[![@heyprincesingh's Holopin board](https://holopin.me/heyprincesingh)](https://holopin.io/@heyprincesingh)
+...[![@heyprincesingh's Holopin board](https://holopin.me/vishalgaur1)](https://holopin.io/@vishalgaur1) 
 
-***
+***-->
 
  <div align="left"><h2>📈 Github Stats</h2>
 
 Stats   | Languages
 --------| ----------
-![Prince's Github Stats](https://github-readme-stats.vercel.app/api?username=heyprincesingh&show_icons=true&theme=vision-friendly-dark) |  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=heyprincesingh&theme=dark&layout=compact&langs_count=8)](https://github.com/anuraghazra/github-readme-stats) 
+![Vishal's Github Stats](https://github-readme-stats.vercel.app/api?username=vishalgaur1&show_icons=true&theme=vision-friendly-dark) |  [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vishalgaur1&theme=dark&layout=compact&langs_count=8)](https://github.com/anuraghazra/github-readme-stats) 
 
 Graph | Contribution
 ------| ----------
-![ Github Stats Graph](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=heyprincesingh&theme=monokai&text_color=white) | ![Contribution](https://github-readme-streak-stats.herokuapp.com/?user=heyprincesingh&theme=dark&width=400)
+![ Github Stats Graph](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=vishalgaur1&theme=monokai&text_color=white) | ![Contribution](https://github-readme-streak-stats.herokuapp.com/?user=vishalgaur1&theme=dark&width=400)
 
 ***
 
