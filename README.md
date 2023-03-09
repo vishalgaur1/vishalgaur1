@@ -1,6 +1,9 @@
-![MasterHead]([https://1.bp.blogspot.com/-7A4WynwLsMw/XbBpCXG8fHI/AAAAAAAAMt4/uOa1bpLskYgrwGbllhSu2SDj_Mig8SXJQCLcBGAsYHQ/s1600/2000_600px.gif](https://miro.medium.com/max/1100/0*FGD6BUzzZs1VJLuY.gif))
+<p align="center">
+  <img src="https://www.careerguide.com/career/wp-content/uploads/2021/06/2-46.gif" hspace="10"/>  
+</p>
 
-<h1 align="center">Hey 👋, I'm Vishal Gaur</h1>
+<h1 align="center"><img src="https://readme-typing-svg.demolab.com?font=Sacramento&size=40&duration=4000&pause=500&color=F7F7F7&center=true&vCenter=true&width=600&height=100&lines=Hey+%F0%9F%91%8B%F0%9F%8F%BB+I+am+Vishal+Gaur;Software+Developer+%F0%9F%92%BB;Full+Stack+Developer+%F0%9F%93%9A" alt="Typing SVG" /></h1>
+
 
 
 
@@ -94,5 +97,3 @@ Graph | Contribution
 <p align="center">
   <img src="https://github.com/heyprincesingh/heyprincesingh/blob/output/github-contribution-grid-snake.svg" alt="Snake"/> 
 </p>
-
-***
