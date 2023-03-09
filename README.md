@@ -7,7 +7,7 @@
 
 
 
-<h4 align="center">I am a software developer who is dedicated to success through hard work and excellent organizational and management skills. Excellent knowledge of data structures and competitive programming. I am driven to learn, grow, and excel in the developer industry. Very cool in managing situations and making the most of opportunities. My leadership abilities have enabled me to lead in every scenario.</h4>
+<h4 align="center">Hello, my name is Vishal Gaur, and I'm currently pursuing a Bachelor's degree in Technology in Computer Science Engineering with specialization in Software Engineering. I'm passionate about programming and developing software applications that solve real-world problems. In my free time, I enjoy watching tech vlogs and experimenting with new coding techniques to enhance my skills. I have completed several software development projects listed in my repositories. I'm always eager to learn and work on new technologies, and I believe that the best way to improve my skills is to contribute to the open-source community. On my GitHub, you'll find some of my projects and contributions, and I'm always open to collaborating and sharing knowledge with other developers. If you have any questions or ideas, feel free to connect with me via my socials!</h4>
 
 <img align="right" alt="Coding" width="45%" src="https://victorelmann.files.wordpress.com/2021/01/website-design.gif">
 <br>
