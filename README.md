@@ -1,6 +1,8 @@
 <div align="center">
 
-# Vishal Gaur
+<img src="./assets/banner.png" alt="Vishal Gaur — Co-founder & Director · NeuOptic" width="100%" />
+
+<br />
 
 **Co-founder & Director @ [NeuOptic Private Limited](https://neuoptic.in) · Full-stack / AI engineer**
 
@@ -44,9 +46,8 @@ Practical tools for real businesses — web AR catalogues and staff operations s
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=vishalgaur1&show_icons=true&hide_border=true&theme=transparent&title_color=e6edf3&icon_color=8b949e&text_color=8b949e&hide_title=true" height="140" alt="GitHub stats" />
-&nbsp;
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=vishalgaur1&layout=compact&hide_border=true&theme=transparent&title_color=e6edf3&text_color=8b949e" height="140" alt="Top languages" />
+![GitHub stats](https://github-readme-stats.shion.dev/api?username=vishalgaur1&show_icons=true&hide_border=true&bg_color=0d1117&title_color=e6edf3&icon_color=8b949e&text_color=8b949e&hide_title=true&cache_seconds=86400)
+![Top languages](https://github-readme-stats.shion.dev/api/top-langs/?username=vishalgaur1&layout=compact&hide_border=true&bg_color=0d1117&title_color=e6edf3&text_color=8b949e&cache_seconds=86400)
 
 <br /><br />
 
