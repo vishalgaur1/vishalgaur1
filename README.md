@@ -2,7 +2,7 @@
 
 # Vishal Gaur
 
-**Co-founder & Director @ [NeuOptic](https://neuoptic.in) · Full-stack / AI engineer**
+**Co-founder & Director @ [NeuOptic Private Limited](https://neuoptic.in) · Full-stack / AI engineer**
 
 Bengaluru · Building products at the intersection of interfaces, operations, and intelligent systems
 
@@ -19,13 +19,13 @@ At **NeuOptic Private Limited**, I lead product and frontend work across AR comm
 
 ---
 
-### NeuOptic
+### NeuOptic Private Limited
 
-Homegrown render engine for multi-model 3D / AR on the web — catalogues that stay smooth on phones — plus ops software so owners can scale without living in the day-to-day.
+Practical tools for real businesses — web AR catalogues and staff operations software.
 
 | Product | What it is |
 |:--------|:-----------|
-| **[Arvi](https://neuoptic.in)** | AR product experiences for restaurants, furniture, artifacts, textiles, and industrial catalogues — many 3D models in-browser without crushing the device |
+| **[Arvi](https://neuoptic.in)** | AR product experiences for restaurants, furniture, artifacts, textiles, and industrial catalogues — powered by our in-house render engine so many 3D models stay smooth in-browser, including on phones |
 | **[NeoEngine](https://engine.neolab.in)** | Staff ops & SOP platform — reminders, workflows, attendance, payroll, and HR tooling so teams run themselves |
 
 ---
