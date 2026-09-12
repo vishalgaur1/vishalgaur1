@@ -2,15 +2,9 @@
 
 # Vishal Gaur
 
-**Co-founder & Director @ [NeuOptic Private Limited](https://neuoptic.in) · Full-stack / AI engineer**
+**Co-founder & Director @ [NeuOptic](https://neuoptic.in) · Full-stack / AI engineer**
 
-Bengaluru
-
-<br />
-
-Frontend systems, product UI, and full-stack product work — building software that holds up in production, not just demos.
-
-<br />
+Bengaluru · Building products at the intersection of interfaces, operations, and intelligent systems
 
 [neuoptic.in](https://neuoptic.in) · [NeoEngine](https://engine.neolab.in) · [LinkedIn](https://www.linkedin.com/in/vishalgaur1) · [Email](mailto:vishalgaur2002@gmail.com)
 
@@ -18,42 +12,46 @@ Frontend systems, product UI, and full-stack product work — building software 
 
 ---
 
-## NeuOptic Private Limited
+### About
 
-Building practical tools for real businesses — web AR catalogues and staff operations software.
+I design and ship product interfaces end-to-end — from the first screen to the systems underneath.  
+At **NeuOptic Private Limited**, I lead product and frontend work across AR commerce experiences and workforce software, with full-stack ownership on NeoEngine.
+
+Quietly open to exceptional people in **sales & expansion**. Not actively hiring otherwise.
+
+---
+
+### NeuOptic
+
+Homegrown render engine for multi-model 3D / AR on the web — catalogues that stay smooth on phones — plus ops software so owners can scale without living in the day-to-day.
 
 | Product | What it is |
-| --- | --- |
-| **[Arvi](https://neuoptic.in)** | Web AR for product catalogues — restaurant menus, furniture, artifacts, textiles, industrial tools, and more. Powered by our in-house render engine so multiple 3D models stay smooth on the web, including on phones. |
-| **[NeoEngine](https://engine.neolab.in)** | Staff ops & HRMS — SOPs, reminders, attendance, payroll, and day-to-day operations so owners can run outlets without living in every detail. |
-
-Company product work stays private. Public signal lives here.
+|:--------|:-----------|
+| **[Arvi](https://neuoptic.in)** | AR product experiences for restaurants, furniture, artifacts, textiles, and industrial catalogues — many 3D models in-browser without crushing the device |
+| **[NeoEngine](https://engine.neolab.in)** | Staff ops & SOP platform — reminders, workflows, attendance, payroll, and HR tooling so teams run themselves |
 
 ---
 
-## Featured
+### Featured
 
-### [VOXORYL](https://github.com/vishalgaur1/VOXORYL)
-
-Local-first voice desktop assistant — on-device reasoning, private memory, and optional computer control.
-
-Python · Ollama · voice UI · local tools
+**[VOXORYL](https://github.com/vishalgaur1/VOXORYL)** — Local-first voice desktop companion with on-device reasoning, private memory, and optional computer control.
 
 ---
 
-## Focus
+### Focus
 
-**Product UI / UX** · **React & modern frontend** · **Full-stack (NeoEngine)** · **Web AR / 3D on the web** · **AI-assisted product systems**
+`React` · `TypeScript` · `UI/UX` · `Full-stack` · `AR / 3D on the web` · `Product engineering`
 
 ---
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=vishalgaur1&show_icons=true&hide_title=true&hide_border=true&bg_color=00000000&title_color=8B949E&icon_color=58A6FF&text_color=C9D1D9&ring_color=58A6FF" height="140" alt="GitHub stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=vishalgaur1&layout=compact&hide_title=true&hide_border=true&bg_color=00000000&title_color=8B949E&text_color=C9D1D9" height="140" alt="Top languages" />
+<img src="https://github-readme-stats.vercel.app/api?username=vishalgaur1&show_icons=true&hide_border=true&theme=transparent&title_color=e6edf3&icon_color=8b949e&text_color=8b949e&hide_title=true" height="140" alt="GitHub stats" />
+&nbsp;
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=vishalgaur1&layout=compact&hide_border=true&theme=transparent&title_color=e6edf3&text_color=8b949e" height="140" alt="Top languages" />
 
 <br /><br />
 
-*Open to exceptional people in sales & expansion — otherwise building quietly.*
+<sub>Bengaluru · <a href="mailto:vishalgaur2002@gmail.com">vishalgaur2002@gmail.com</a></sub>
 
 </div>
