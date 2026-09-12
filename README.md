@@ -17,8 +17,6 @@ Bengaluru · Building products at the intersection of interfaces, operations, an
 I design and ship product interfaces end-to-end — from the first screen to the systems underneath.  
 At **NeuOptic Private Limited**, I lead product and frontend work across AR commerce experiences and workforce software, with full-stack ownership on NeoEngine.
 
-Quietly open to exceptional people in **sales & expansion**. Not actively hiring otherwise.
-
 ---
 
 ### NeuOptic
@@ -53,5 +51,9 @@ Homegrown render engine for multi-model 3D / AR on the web — catalogues that s
 <br /><br />
 
 <sub>Bengaluru · <a href="mailto:vishalgaur2002@gmail.com">vishalgaur2002@gmail.com</a></sub>
+
+<br />
+
+<sub>Open to exceptional people in sales & expansion — otherwise building.</sub>
 
 </div>
