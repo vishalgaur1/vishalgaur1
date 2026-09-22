@@ -41,12 +41,14 @@ FONT_URLS = {
 }
 
 # Sizes are 1× pixels on the 1280 canvas.
-NAME_PX = 92
-ROLE_PX = 34
-SECTION_PX = 48
-PRODUCT_PX = 44
-BODY_PX = 34
-URL_PX = 30
+# Modest step down from the oversized pass (name ~20%, body ~12%).
+NAME_PX = 74
+ROLE_PX = 30
+SECTION_PX = 40
+PRODUCT_PX = 38
+BODY_PX = 30
+URL_PX = 27
+LINE_GAP = 20
 
 
 def ensure_fonts() -> None:
@@ -138,10 +140,11 @@ def save_rgb(img: Image.Image, path: Path) -> None:
 
 
 def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
-    assert 80 <= NAME_PX <= 96
-    assert 28 <= BODY_PX <= 36
-    assert 28 <= ROLE_PX <= 36
-    assert 28 <= URL_PX <= 36
+    assert 68 <= NAME_PX <= 84
+    assert 26 <= BODY_PX <= 32
+    assert 26 <= ROLE_PX <= 32
+    assert 24 <= URL_PX <= 30
+    assert 16 <= LINE_GAP <= 24
 
     name_f = font(SERIF, NAME_PX)
     role_f = font(SERIF_I, ROLE_PX)
@@ -155,22 +158,26 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
 
     paragraphs = {
         "who1": [
-            "I design product interfaces and ship them.",
-            "The screen someone uses, and the system under it.",
+            "Designs product interfaces.",
+            "Builds the systems under them.",
         ],
         "who2": [
-            "I co-founded NeuOptic in Bengaluru.",
-            "I lead the product, and I still build the frontend.",
+            "Bengaluru.",
         ],
-        "arvi": "AR commerce. Web catalogues for restaurants, furniture, textiles, artifacts, and industrial goods, kept light for a phone.",
+        "arvi": "AR catalogues that stay light on a phone.",
         "neo": [
-            "Staff ops. Reminders, workflows, attendance, and payroll,",
-            "so owners are not living in the day-to-day.",
+            "Ops tools so owners aren't buried in the day-to-day.",
+            "Reminders, workflows, attendance, payroll.",
         ],
-        "voxy": "Local voice. On-device reasoning and private memory, on your computer. The short name is Voxy. Pronounced vox-OR-ill.",
-        "vis1": "On-device tools that actually do things on your computer.",
-        "vis2": "Practical software for real businesses. Built to be used, not only shown.",
-        "now": "The repo, the site, and NeuOptic.",
+        "voxy": [
+            "Local voice on your machine.",
+            "On-device reasoning, private memory. Voxy — vox-OR-ill.",
+        ],
+        "vis1": [
+            "Tools that stay on-device and actually do something.",
+            "Software meant to be used.",
+        ],
+        "now": "The repo, the site, NeuOptic.",
     }
     wrapped: dict[str, list[str]] = {}
     for key, text in paragraphs.items():
@@ -188,43 +195,39 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
             print(f"  {key}: {line}")
 
     # (op, payload). Gaps are 1× pixels.
+    # Section gaps tighter than the sparse pass; LINE_GAP carries the breath.
     ops: list[tuple] = [
-        ("gap", 108),
-        ("text", ("Vishal Gaur", name_f, 18)),
-        ("text", ("Co-founder & Director, NeuOptic, Bengaluru", role_f, 28)),
-        ("rule", 84),
-        ("gap", 148),
-        ("text", ("Who I am", section_f, 32)),
+        ("gap", 96),
+        ("text", ("Vishal Gaur", name_f, 16)),
+        ("text", ("NeuOptic · Bengaluru", role_f, 24)),
+        ("rule", 72),
+        ("gap", 104),
         ("para", "who1"),
-        ("gap", 28),
+        ("gap", 22),
         ("para", "who2"),
-        ("gap", 156),
-        ("text", ("What I do", section_f, 36)),
-        ("text", ("Arvi", product_f, 14)),
+        ("gap", 112),
+        ("text", ("Arvi", product_f, 12)),
         ("para", "arvi"),
-        ("gap", 56),
-        ("text", ("NeoEngine", product_f, 14)),
+        ("gap", 48),
+        ("text", ("NeoEngine", product_f, 12)),
         ("para", "neo"),
-        ("gap", 16),
+        ("gap", 14),
         ("url", "engine.neolab.in"),
-        ("gap", 56),
-        ("text", ("VOXORYL", product_f, 14)),
+        ("gap", 48),
+        ("text", ("VOXORYL", product_f, 12)),
         ("para", "voxy"),
-        ("gap", 156),
-        ("text", ("Vision", section_f, 32)),
+        ("gap", 104),
         ("para", "vis1"),
-        ("gap", 28),
-        ("para", "vis2"),
-        ("gap", 156),
-        ("text", ("Now", section_f, 32)),
+        ("gap", 112),
+        ("text", ("Now", section_f, 28)),
         ("para", "now"),
-        ("gap", 52),
+        ("gap", 44),
         ("dest", ("VOXORYL", "github.com/vishalgaur1/VOXORYL")),
-        ("gap", 44),
+        ("gap", 36),
         ("dest", ("Site", "vishalgaur1.github.io/VOXORYL")),
-        ("gap", 44),
+        ("gap", 36),
         ("dest", ("NeuOptic", "neuoptic.in")),
-        ("gap", 156),
+        ("gap", 128),
     ]
 
     def text_h(text: str, fnt) -> int:
@@ -251,7 +254,7 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
             for i, line in enumerate(lines):
                 y += text_h(line, body_f)
                 if i < len(lines) - 1:
-                    y += 16 * S
+                    y += LINE_GAP * S
         elif op == "url":
             ensure_fit(payload, url_f)
             y += text_h(payload, url_f) + 14 * S
@@ -268,7 +271,7 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
     img = make_field(W * S, height)
     draw = ImageDraw.Draw(img)
     y = 0
-    line_gap = 16 * S
+    line_gap = LINE_GAP * S
 
     for op, payload in ops:
         if op == "gap":
