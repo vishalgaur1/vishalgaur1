@@ -1,8 +1,15 @@
 """Compose one continuous GitHub profile page.
 
-Same field as the current banner: #061018 opening into #0d3b3a and #12352c.
-One PNG, so GitHub cannot insert a dark gap between panels. Addresses are
-drawn in the art (underlined), not as markdown links.
+Navy (#061018) → teal (#0d3b3a) → emerald (#12352c). One PNG so GitHub
+cannot insert a dark gap between panels. Addresses are drawn in the art
+(underlined), not as markdown links.
+
+Display face: Libre Baskerville (normal book proportions).
+Body: Source Sans 3.
+
+Instrument Serif was the vertical-stretch culprit (V glyph h/w ≈ 1.48).
+Libre Baskerville measures ≈ 0.98. Hi-res canvas is always downscaled with
+a uniform factor on X and Y — never a non-square resize.
 """
 from __future__ import annotations
 
@@ -18,7 +25,7 @@ OUT.mkdir(exist_ok=True)
 FONT_DIR.mkdir(exist_ok=True)
 
 W = 1280
-S = 2
+S = 2  # supersample; downscale must stay uniform
 MARGIN = 112
 MEASURE = W - MARGIN * 2
 
@@ -27,28 +34,25 @@ TEAL = (13, 59, 58)      # #0d3b3a
 EMERALD = (18, 53, 44)   # #12352c
 INK = (246, 248, 246)
 
-SERIF = "InstrumentSerif-Regular.ttf"
-SERIF_I = "InstrumentSerif-Italic.ttf"
+SERIF = "LibreBaskerville-Regular.ttf"
+SERIF_I = "LibreBaskerville-Italic.ttf"
 SANS = "SourceSans3-Regular.ttf"
 
 FONT_URLS = {
-    SERIF: "https://cdn.jsdelivr.net/fontsource/fonts/instrument-serif@5.2.5/latin-400-normal.ttf",
-    SERIF_I: "https://cdn.jsdelivr.net/fontsource/fonts/instrument-serif@5.2.5/latin-400-italic.ttf",
-    "Fraunces-SemiBold.ttf": "https://cdn.jsdelivr.net/fontsource/fonts/fraunces@5.2.5/latin-600-normal.ttf",
-    "Fraunces-Regular.ttf": "https://cdn.jsdelivr.net/fontsource/fonts/fraunces@5.2.5/latin-400-normal.ttf",
+    SERIF: "https://cdn.jsdelivr.net/fontsource/fonts/libre-baskerville@5.2.5/latin-400-normal.ttf",
+    SERIF_I: "https://cdn.jsdelivr.net/fontsource/fonts/libre-baskerville@5.2.5/latin-400-italic.ttf",
     SANS: "https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@5.2.5/latin-400-normal.ttf",
     "SourceSans3-Semibold.ttf": "https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@5.2.5/latin-600-normal.ttf",
 }
 
-# Sizes are 1× pixels on the 1280 canvas.
-# Modest step down from the oversized pass (name ~20%, body ~12%).
-NAME_PX = 74
-ROLE_PX = 30
-SECTION_PX = 40
-PRODUCT_PX = 38
-BODY_PX = 30
-URL_PX = 27
-LINE_GAP = 20
+# Readable 1× sizes — not tiny, not huge.
+NAME_PX = 62
+ROLE_PX = 26
+SECTION_PX = 32
+PRODUCT_PX = 30
+BODY_PX = 27
+URL_PX = 23
+LINE_GAP = 12
 
 
 def ensure_fonts() -> None:
@@ -70,11 +74,6 @@ def lerp(a: tuple[int, int, int], b: tuple[int, int, int], t: float) -> tuple[in
 
 
 def field_color(tx: float, ty: float) -> tuple[int, int, int]:
-    """Same wash as the current banner, given more vertical room on a long page.
-
-    Left stays deep navy. Teal and emerald take the right, and the foot of the
-    page settles further into #12352c.
-    """
     end = lerp(TEAL, EMERALD, 0.28 + 0.72 * ty)
     t = tx * 0.72 + ty * 0.34
     return lerp(NAVY, end, min(1.0, t))
@@ -127,24 +126,30 @@ def wrap(draw: ImageDraw.ImageDraw, text: str, fnt, max_w: int) -> list[str]:
             cur = word
     if cur:
         lines.append(cur)
-    for line in lines:
-        if len(lines) > 1 and len(line) < 14:
-            print(f"  short line: {line!r}")
     return lines
 
 
 def save_rgb(img: Image.Image, path: Path) -> None:
-    img = img.resize((W, img.size[1] // S), Image.Resampling.LANCZOS)
+    """Uniform downscale only — same factor on width and height."""
+    src_w, src_h = img.size
+    assert src_w == W * S, f"unexpected width {src_w}"
+    assert src_h % S == 0, f"height {src_h} not divisible by S={S}"
+    out_w, out_h = src_w // S, src_h // S
+    assert out_w == W
+    scale_x = out_w / src_w
+    scale_y = out_h / src_h
+    assert abs(scale_x - scale_y) < 1e-9, (scale_x, scale_y)
+    img = img.resize((out_w, out_h), Image.Resampling.LANCZOS)
     img.save(path, "PNG", optimize=True)
-    print(f"wrote {path.name} {img.size[0]}x{img.size[1]} {path.stat().st_size // 1024}KB")
+    print(f"wrote {path.name} {img.size[0]}x{img.size[1]} {path.stat().st_size // 1024}KB  scale={scale_x}")
 
 
 def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
-    assert 68 <= NAME_PX <= 84
-    assert 26 <= BODY_PX <= 32
-    assert 26 <= ROLE_PX <= 32
-    assert 24 <= URL_PX <= 30
-    assert 16 <= LINE_GAP <= 24
+    assert 56 <= NAME_PX <= 72
+    assert 24 <= BODY_PX <= 32
+    assert 22 <= ROLE_PX <= 30
+    assert 20 <= URL_PX <= 28
+    assert 10 <= LINE_GAP <= 16
 
     name_f = font(SERIF, NAME_PX)
     role_f = font(SERIF_I, ROLE_PX)
@@ -153,81 +158,81 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
     body_f = font(SANS, BODY_PX)
     url_f = font(SANS, URL_PX)
 
+    # Guard: reject tall condensed display faces (Instrument Serif trap).
+    v_l, v_t, v_r, v_b = ink_box(metrics, "V", name_f)
+    v_aspect = (v_b - v_t) / max(1, v_r - v_l)
+    print(f"display V aspect h/w={v_aspect:.2f} (want ~0.9-1.15)")
+    assert 0.85 <= v_aspect <= 1.20, f"display face looks stretched: V h/w={v_aspect:.2f}"
+
     max_w = MEASURE * S
     x = MARGIN * S
 
     paragraphs = {
-        "who1": [
-            "Product interfaces.",
-            "The screen, and what sits under it.",
-        ],
-        "who2": [
-            "NeuOptic. Bengaluru.",
-        ],
-        "arvi": [
-            "AR catalogues. Restaurants, furniture, textiles, artifacts.",
-            "Kept light for a phone.",
-        ],
-        "neo": [
-            "Staff ops. Reminders, workflows, attendance, payroll.",
-        ],
-        "voxy": [
-            "Local voice. On-device reasoning and private memory.",
-            "Voxy. Pronounced vox-OR-ill.",
-        ],
-        "vis1": [
-            "On-device tools. Software that gets used.",
-        ],
-        "now": "The repo, the site, NeuOptic.",
+        "who": (
+            "I design product interfaces and build the systems behind them — "
+            "both the screens people use and the backend that runs them."
+        ),
+        "intro": (
+            "NeuOptic makes practical software for real businesses."
+        ),
+        "arvi": (
+            "Arvi — web AR catalogues for restaurants, furniture, textiles, "
+            "and other products. Built to stay light so they run smoothly on a phone."
+        ),
+        "neo": (
+            "NeoEngine — staff operations: reminders, workflows, attendance, "
+            "and payroll for business owners."
+        ),
+        "voxy": (
+            "VOXORYL (short name: Voxy, pronounced vox-OR-ill) is an open-source "
+            "voice assistant for your PC. It runs locally on your machine, keeps "
+            "memory private, and can open apps and help control the computer with your voice."
+        ),
+        "why": (
+            "I care about tools that run on-device and actually do work — "
+            "software people use, not only demos."
+        ),
+        "now": "Links if you want to dig in.",
     }
     wrapped: dict[str, list[str]] = {}
     for key, text in paragraphs.items():
-        if isinstance(text, list):
-            for line in text:
-                w, _ = ink_size(metrics, line, body_f)
-                if w > max_w:
-                    raise SystemExit(f"overflow {w}px: {line}")
-            wrapped[key] = text
-        else:
-            wrapped[key] = wrap(metrics, text, body_f, max_w)
+        wrapped[key] = wrap(metrics, text, body_f, max_w)
     print("lines:")
     for key, lines in wrapped.items():
         for line in lines:
             print(f"  {key}: {line}")
 
-    # (op, payload). Gaps are 1× pixels.
     ops: list[tuple] = [
-        ("gap", 108),
-        ("text", ("Vishal Gaur", name_f, 18)),
-        ("text", ("Co-founder, NeuOptic · Bengaluru", role_f, 28)),
-        ("rule", 84),
-        ("gap", 132),
-        ("para", "who1"),
-        ("gap", 24),
-        ("para", "who2"),
-        ("gap", 148),
-        ("text", ("Arvi", product_f, 14)),
-        ("para", "arvi"),
+        ("gap", 84),
+        ("text", ("Vishal Gaur", name_f, 14)),
+        ("text", ("Co-founder at NeuOptic · Bengaluru", role_f, 20)),
+        ("rule", 64),
         ("gap", 56),
-        ("text", ("NeoEngine", product_f, 14)),
-        ("para", "neo"),
-        ("gap", 16),
-        ("url", "engine.neolab.in"),
-        ("gap", 56),
-        ("text", ("VOXORYL", product_f, 14)),
-        ("para", "voxy"),
-        ("gap", 132),
-        ("para", "vis1"),
-        ("gap", 148),
-        ("text", ("Now", section_f, 32)),
-        ("para", "now"),
+        ("para", "who"),
         ("gap", 52),
+        ("text", ("NeuOptic", section_f, 16)),
+        ("para", "intro"),
+        ("gap", 28),
+        ("para", "arvi"),
+        ("gap", 22),
+        ("para", "neo"),
+        ("gap", 12),
+        ("url", "engine.neolab.in"),
+        ("gap", 52),
+        ("text", ("VOXORYL", section_f, 16)),
+        ("para", "voxy"),
+        ("gap", 52),
+        ("para", "why"),
+        ("gap", 64),
+        ("text", ("Links", section_f, 16)),
+        ("para", "now"),
+        ("gap", 32),
         ("dest", ("VOXORYL", "github.com/vishalgaur1/VOXORYL")),
-        ("gap", 44),
+        ("gap", 26),
         ("dest", ("Site", "vishalgaur1.github.io/VOXORYL")),
-        ("gap", 44),
+        ("gap", 26),
         ("dest", ("NeuOptic", "neuoptic.in")),
-        ("gap", 156),
+        ("gap", 96),
     ]
 
     def text_h(text: str, fnt) -> int:
@@ -243,8 +248,7 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
         if op == "gap":
             y += payload * S
         elif op == "rule":
-            y += 3 * S
-            y += 8 * S
+            y += 3 * S + 8 * S
         elif op == "text":
             text, fnt, after = payload
             ensure_fit(text, fnt)
@@ -257,17 +261,19 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
                     y += LINE_GAP * S
         elif op == "url":
             ensure_fit(payload, url_f)
-            y += text_h(payload, url_f) + 14 * S
+            y += text_h(payload, url_f) + 12 * S
         elif op == "dest":
             label, url = payload
             ensure_fit(label, product_f)
             ensure_fit(url, url_f)
-            y += text_h(label, product_f) + 12 * S
-            y += text_h(url, url_f) + 14 * S
+            y += text_h(label, product_f) + 10 * S
+            y += text_h(url, url_f) + 12 * S
         else:
             raise SystemExit(op)
 
-    height = y
+    # Pad to a multiple of S so the uniform 1/S downscale stays pixel-exact
+    # on both axes (odd FreeType glyph heights can otherwise leave an odd canvas).
+    height = y + (S - (y % S)) % S
     img = make_field(W * S, height)
     draw = ImageDraw.Draw(img)
     y = 0
@@ -287,35 +293,34 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
             y += h + after * S
             continue
         if op == "para":
-            lines = wrapped[payload]
-            for i, line in enumerate(lines):
+            for i, line in enumerate(wrapped[payload]):
                 _, h = draw_ink(draw, x, y, line, body_f)
                 y += h
-                if i < len(lines) - 1:
+                if i < len(wrapped[payload]) - 1:
                     y += line_gap
             continue
         if op == "url":
             w, h = draw_ink(draw, x, y, payload, url_f)
-            uy = y + h + 6 * S
+            uy = y + h + 5 * S
             draw.rectangle([x, uy, x + w, uy + 2 * S], fill=INK)
-            y += h + 14 * S
+            y += h + 12 * S
             continue
         if op == "dest":
             label, url = payload
             _, h = draw_ink(draw, x, y, label, product_f)
-            y += h + 12 * S
+            y += h + 10 * S
             w, h = draw_ink(draw, x, y, url, url_f)
-            uy = y + h + 6 * S
+            uy = y + h + 5 * S
             draw.rectangle([x, uy, x + w, uy + 2 * S], fill=INK)
-            y += h + 14 * S
+            y += h + 12 * S
             continue
 
-    if y != height:
-        raise SystemExit(f"paint cursor {y} != measured {height}")
+    if y > height:
+        raise SystemExit(f"paint cursor {y} > padded height {height}")
+    # Trailing pad (0..S-1 px) is empty field — intentional.
 
     tl = img.getpixel((4, 4))
     br = img.getpixel((W * S - 8, height - 8))
-    # Grain nudge is at most +1, so navy stays in family.
     assert tl[0] <= 12 and tl[1] <= 24 and tl[2] <= 32, tl
     assert br[1] > tl[1] + 20, (tl, br)
     print(f"canvas {W}x{height // S}  corners tl={tl} br={br}")
