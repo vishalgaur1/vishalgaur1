@@ -158,24 +158,25 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
 
     paragraphs = {
         "who1": [
-            "Designs product interfaces.",
-            "Builds the systems under them.",
+            "Product interfaces.",
+            "The screen, and what sits under it.",
         ],
         "who2": [
-            "Bengaluru.",
+            "NeuOptic. Bengaluru.",
         ],
-        "arvi": "AR catalogues that stay light on a phone.",
+        "arvi": [
+            "AR catalogues. Restaurants, furniture, textiles, artifacts.",
+            "Kept light for a phone.",
+        ],
         "neo": [
-            "Ops tools so owners aren't buried in the day-to-day.",
-            "Reminders, workflows, attendance, payroll.",
+            "Staff ops. Reminders, workflows, attendance, payroll.",
         ],
         "voxy": [
-            "Local voice on your machine.",
-            "On-device reasoning, private memory. Voxy — vox-OR-ill.",
+            "Local voice. On-device reasoning and private memory.",
+            "Voxy. Pronounced vox-OR-ill.",
         ],
         "vis1": [
-            "Tools that stay on-device and actually do something.",
-            "Software meant to be used.",
+            "On-device tools. Software that gets used.",
         ],
         "now": "The repo, the site, NeuOptic.",
     }
@@ -195,39 +196,38 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
             print(f"  {key}: {line}")
 
     # (op, payload). Gaps are 1× pixels.
-    # Section gaps tighter than the sparse pass; LINE_GAP carries the breath.
     ops: list[tuple] = [
-        ("gap", 96),
-        ("text", ("Vishal Gaur", name_f, 16)),
-        ("text", ("NeuOptic · Bengaluru", role_f, 24)),
-        ("rule", 72),
-        ("gap", 104),
+        ("gap", 108),
+        ("text", ("Vishal Gaur", name_f, 18)),
+        ("text", ("Co-founder, NeuOptic · Bengaluru", role_f, 28)),
+        ("rule", 84),
+        ("gap", 132),
         ("para", "who1"),
-        ("gap", 22),
+        ("gap", 24),
         ("para", "who2"),
-        ("gap", 112),
-        ("text", ("Arvi", product_f, 12)),
+        ("gap", 148),
+        ("text", ("Arvi", product_f, 14)),
         ("para", "arvi"),
-        ("gap", 48),
-        ("text", ("NeoEngine", product_f, 12)),
+        ("gap", 56),
+        ("text", ("NeoEngine", product_f, 14)),
         ("para", "neo"),
-        ("gap", 14),
+        ("gap", 16),
         ("url", "engine.neolab.in"),
-        ("gap", 48),
-        ("text", ("VOXORYL", product_f, 12)),
+        ("gap", 56),
+        ("text", ("VOXORYL", product_f, 14)),
         ("para", "voxy"),
-        ("gap", 104),
+        ("gap", 132),
         ("para", "vis1"),
-        ("gap", 112),
-        ("text", ("Now", section_f, 28)),
+        ("gap", 148),
+        ("text", ("Now", section_f, 32)),
         ("para", "now"),
-        ("gap", 44),
+        ("gap", 52),
         ("dest", ("VOXORYL", "github.com/vishalgaur1/VOXORYL")),
-        ("gap", 36),
+        ("gap", 44),
         ("dest", ("Site", "vishalgaur1.github.io/VOXORYL")),
-        ("gap", 36),
+        ("gap", 44),
         ("dest", ("NeuOptic", "neuoptic.in")),
-        ("gap", 128),
+        ("gap", 156),
     ]
 
     def text_h(text: str, fnt) -> int:
