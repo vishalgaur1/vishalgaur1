@@ -34,7 +34,8 @@ Practical tools for real businesses — web AR catalogues and staff operations s
 
 ### Featured
 
-**[VOXORYL](https://github.com/vishalgaur1/VOXORYL)** — Local-first voice desktop companion with on-device reasoning, private memory, and optional computer control.
+**[VOXORYL](https://github.com/vishalgaur1/VOXORYL)** — Local-first voice desktop companion with on-device reasoning, private memory, and optional computer control.  
+[Site](https://vishalgaur1.github.io/VOXORYL/) · *vox-OR-ill* · short name **Voxy**
 
 ---
 
@@ -44,12 +45,29 @@ Practical tools for real businesses — web AR catalogues and staff operations s
 
 ---
 
+<!-- ─── FOOTER ─── -->
 <div align="center">
 
-<sub>Bengaluru · <a href="mailto:vishalgaur2002@gmail.com">vishalgaur2002@gmail.com</a></sub>
+<img src="./assets/divider.svg" alt="" width="420" />
 
 <br />
 
-<sub>Open to exceptional people in sales & expansion — otherwise building.</sub>
+<img src="./assets/typing-voxoryl.svg" alt="VOXORYL — local voice" width="320" />
+
+<br />
+
+<sub>
+<strong><a href="https://github.com/vishalgaur1/VOXORYL">VOXORYL</a></strong>
+· voice that stays on your machine
+· <a href="https://vishalgaur1.github.io/VOXORYL/">site</a>
+</sub>
+
+<br /><br />
+
+<code>Python</code>&nbsp;·&nbsp;<code>Local AI</code>&nbsp;·&nbsp;<code>Voice</code>
+
+<br /><br />
+
+<sub><a href="mailto:vishalgaur2002@gmail.com">vishalgaur2002@gmail.com</a></sub>
 
 </div>
