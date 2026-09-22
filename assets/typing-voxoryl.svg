@@ -1,36 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="460" height="40" viewBox="0 0 460 40" role="img" aria-label="VOXORYL — local voice">
-  <defs>
-    <style>
-      @keyframes type {
-        0%, 12% { width: 0; }
-        55%, 88% { width: 248px; }
-        100% { width: 0; }
-      }
-      @keyframes blink {
-        0%, 48% { opacity: 1; }
-        50%, 98% { opacity: 0; }
-        100% { opacity: 1; }
-      }
-      .mask {
-        animation: type 5.2s steps(28, end) infinite;
-      }
-      .cursor {
-        fill: #9ec4ff;
-        animation: blink 1s step-end infinite;
-      }
-    </style>
-    <clipPath id="reveal">
-      <rect class="mask" x="0" y="0" width="0" height="40"/>
-    </clipPath>
-  </defs>
-  <rect width="460" height="40" fill="transparent"/>
-  <g clip-path="url(#reveal)" transform="translate(106, 0)">
-    <text x="0" y="25"
-          font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
-          font-size="13"
-          font-weight="500"
-          letter-spacing="2.2"
-          fill="#b8d4f5">VOXORYL · local voice</text>
-  </g>
-  <rect class="cursor" x="358" y="12" width="1.5" height="14" rx="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="40" viewBox="0 0 460 40" role="img" aria-label="VOXORYL - local voice">
+  <!-- Static mark only — no CSS/script (GitHub README img-safe) -->
+  <rect width="460" height="40" fill="none"/>
+  <text x="106" y="25"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="13"
+        font-weight="500"
+        letter-spacing="2.2"
+        fill="#b8d4f5">VOXORYL · local voice</text>
+  <rect x="358" y="12" width="1.5" height="14" rx="0.5" fill="#9ec4ff"/>
 </svg>

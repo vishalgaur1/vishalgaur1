@@ -48,11 +48,13 @@ Practical tools for real businesses — web AR catalogues and staff operations s
 <!-- ─── FOOTER ─── -->
 <div align="center">
 
-<img src="./assets/divider.svg" alt="" width="420" />
+<img src="https://raw.githubusercontent.com/vishalgaur1/vishalgaur1/main/assets/divider.svg" alt="" width="420" />
 
 <br />
 
-<img src="./assets/typing-voxoryl.svg" alt="VOXORYL — local voice" width="320" />
+<a href="https://github.com/vishalgaur1/VOXORYL">
+  <img src="https://raw.githubusercontent.com/vishalgaur1/vishalgaur1/main/assets/typing-voxoryl.png" alt="VOXORYL — local voice" width="320" />
+</a>
 
 <br />
 
