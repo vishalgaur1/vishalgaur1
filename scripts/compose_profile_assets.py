@@ -1,8 +1,9 @@
-"""Compose a full-width editorial GitHub profile — one masthead, not a card stack.
+"""Compose one navy-to-emerald GitHub profile banner.
 
-1280-wide PNGs, GitHub dark grounds (#0d1117 / #161b22).
-Name ≥ 96px, body ≥ 32px. No glass, glow, pills, or cream panels.
-Destinations are set in the art; the README links the whole image.
+1280-wide. Deep navy #061018 into teal #0d3b3a and emerald #12352c.
+The name stays in the 72–96px range. NeuOptic and VOXORYL sit on the
+same gradient as compact bands, cropped apart only so each half can be
+a whole-image link. No glass, glow, cards, or cream panels.
 """
 from __future__ import annotations
 
@@ -18,17 +19,35 @@ OUT.mkdir(exist_ok=True)
 FONT_DIR.mkdir(exist_ok=True)
 
 W = 1280
-X = 80
-RIGHT = W - 80
-MEASURE = RIGHT - X  # 1120
+PAD_X = 72
+X = PAD_X
+RIGHT = W - PAD_X
+MEASURE = RIGHT - X
 
-# GitHub dark. Type is the github fg scale — high contrast, not cream paper.
-PAGE = (13, 17, 23)       # #0d1117
-PLATE = (22, 27, 34)      # #161b22
-INK = (240, 246, 252)     # #f0f6fc
-BODY = (230, 237, 243)    # #e6edf3
-META = (201, 209, 217)    # #c9d1d9
-RULE = (139, 148, 158)    # #8b949e
+# Endpoints from the brief. Midtones are blends of these, not a brighter accent.
+NAVY = (6, 16, 24)       # #061018
+TEAL = (13, 59, 58)      # #0d3b3a
+EMERALD = (18, 53, 44)   # #12352c
+
+INK = (244, 248, 246)
+ROLE_C = (236, 244, 240)
+CRAFT_C = (228, 238, 234)
+BODY = (222, 234, 228)
+META = (206, 222, 216)
+RULE = (78, 124, 116)
+
+# Readable on a 1280 canvas. Do not fit-to-width — that blew the name up to ~280px.
+NAME_PX = 88
+ROLE_PX = 36
+CRAFT_PX = 32
+PLACE_PX = 26
+KICKER_PX = 36
+TITLE_PX = 44
+DESC_PX = 30
+WORD_PX = 64
+SENT_PX_MIN = 30
+SENT_PX_MAX = 40
+URL_PX = 24
 
 FONT_URLS = {
     "InstrumentSerif-Regular.ttf": (
@@ -81,28 +100,11 @@ def draw_ink(
     fnt,
     fill: tuple[int, int, int],
 ) -> tuple[int, int, int, int]:
-    """Draw so the ink bounds start at top_left. Returns ink box (l, t, r, b)."""
+    """Draw so the ink bounds start at top_left. Returns the ink box."""
     l, t, r, b = ink_bbox(draw, text, fnt)
     x, y = top_left
     draw.text((x - l, y - t), text, font=fnt, fill=fill)
     return (x, y, x + (r - l), y + (b - t))
-
-
-def fit_size(draw: ImageDraw.ImageDraw, font_name: str, text: str, max_w: int, lo: int, hi: int) -> int:
-    best = lo
-    found = False
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        w, _ = ink_size(draw, text, font(font_name, mid))
-        if w <= max_w:
-            best = mid
-            found = True
-            lo = mid + 1
-        else:
-            hi = mid - 1
-    if not found:
-        raise SystemExit(f"{text!r} does not fit at {best}px within {max_w}px")
-    return best
 
 
 def draw_lines(
@@ -127,6 +129,52 @@ def draw_lines(
     return (x, top, right, bottom)
 
 
+def fit_size(draw: ImageDraw.ImageDraw, font_name: str, text: str, max_w: int, lo: int, hi: int) -> int:
+    best = lo
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        w, _ = ink_size(draw, text, font(font_name, mid))
+        if w <= max_w:
+            best = mid
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return best
+
+
+def lerp(a: tuple[int, int, int], b: tuple[int, int, int], t: float) -> tuple[int, int, int]:
+    t = 0.0 if t < 0 else 1.0 if t > 1 else t
+    return tuple(int(a[i] + (b[i] - a[i]) * t + 0.5) for i in range(3))
+
+
+def field_color(tx: float, ty: float) -> tuple[int, int, int]:
+    """Left edge stays deep navy; teal and emerald take the right.
+
+    Vertical shift is gentle so the two bands still read as one field.
+    """
+    end = lerp(TEAL, EMERALD, 0.30 + 0.70 * ty)
+    t = tx * 0.82 + ty * 0.18
+    return lerp(NAVY, end, t)
+
+
+def make_field(w: int, h: int) -> Image.Image:
+    buf = bytearray(w * h * 3)
+    i = 0
+    inv_w = 1.0 / (w - 1)
+    inv_h = 1.0 / (h - 1)
+    for y in range(h):
+        ty = y * inv_h
+        for x in range(w):
+            r, g, b = field_color(x * inv_w, ty)
+            # Tiny ordered dither so the dark blend does not band.
+            nudge = 1 if ((x * 3 + y * 5) & 7) > 4 else 0
+            buf[i] = min(255, r + nudge)
+            buf[i + 1] = min(255, g + nudge)
+            buf[i + 2] = min(255, b + nudge)
+            i += 3
+    return Image.frombytes("RGB", (w, h), bytes(buf))
+
+
 def save_rgb(img: Image.Image, path: Path) -> None:
     if img.mode != "RGB":
         img = img.convert("RGB")
@@ -134,98 +182,13 @@ def save_rgb(img: Image.Image, path: Path) -> None:
     print(f"wrote {path.name} {img.size[0]}x{img.size[1]} {path.stat().st_size // 1024}KB")
 
 
-def make_hero(scratch: ImageDraw.ImageDraw) -> None:
-    """Full-bleed nameplate. The name spans the measure; no inset card."""
-    h = 720
-    img = Image.new("RGB", (W, h), PLATE)
-    draw = ImageDraw.Draw(img)
-
+def compose(scratch: ImageDraw.ImageDraw) -> None:
     name = "Vishal Gaur"
     role = "Co-founder & Director, NeuOptic"
     craft = "Product interfaces end-to-end — AR, ops platforms, local AI."
-
-    name_px = fit_size(scratch, "InstrumentSerif-Regular.ttf", name, MEASURE, 96, 360)
-    craft_px = fit_size(scratch, "SourceSans3-Regular.ttf", craft, MEASURE, 36, 48)
-    role_px = 56
-    meta_px = 32
-    url_px = 26
-
-    name_f = font("InstrumentSerif-Regular.ttf", name_px)
-    role_f = font("InstrumentSerif-Italic.ttf", role_px)
-    craft_f = font("SourceSans3-Regular.ttf", craft_px)
-    meta_f = font("SourceSans3-Regular.ttf", meta_px)
-    url_f = font("SourceSans3-Regular.ttf", url_px)
-
-    _, name_h = ink_size(scratch, name, name_f)
-    _, role_h = ink_size(scratch, role, role_f)
-    _, craft_h = ink_size(scratch, craft, craft_f)
-    _, meta_h = ink_size(scratch, "Bengaluru", meta_f)
-
-    # One lockup, centered in the 720 frame — footer sits with the type, not in a hole.
-    gap_name_rule = 36
-    rule_w = 2
-    gap_rule_role = 40
-    gap_role_craft = 32
-    gap_craft_footer = 56
-    stack_h = (
-        name_h
-        + gap_name_rule
-        + rule_w
-        + gap_rule_role
-        + role_h
-        + gap_role_craft
-        + craft_h
-        + gap_craft_footer
-        + meta_h
-    )
-    name_top = max(72, (h - stack_h) // 2)
-
-    name_box = draw_ink(draw, (X, name_top), name, name_f, INK)
-    rule_y = name_box[3] + gap_name_rule
-    draw.rectangle((X, rule_y, RIGHT, rule_y + rule_w), fill=BODY)
-
-    role_box = draw_ink(draw, (X, rule_y + rule_w + gap_rule_role), role, role_f, BODY)
-    craft_box = draw_ink(draw, (X, role_box[3] + gap_role_craft), craft, craft_f, BODY)
-
-    footer_top = craft_box[3] + gap_craft_footer
-    meta_box = draw_ink(draw, (X, footer_top), "Bengaluru", meta_f, META)
-    url = "neuoptic.in"
-    url_w, url_h = ink_size(scratch, url, url_f)
-    draw_ink(draw, (RIGHT - url_w, footer_top + max(0, (meta_h - url_h) // 2)), url, url_f, META)
-
-    assert name_px >= 96, name_px
-    assert role_px >= 32 and craft_px >= 32
-    assert name_box[2] <= RIGHT + 1
-    assert craft_box[2] <= RIGHT + 1
-    assert name_box[1] >= 64
-    assert craft_box[3] + 48 <= meta_box[1], f"craft/footer collision {craft_box[3]} {meta_box[1]}"
-    assert role_box[1] - (rule_y + rule_w) >= 32
-    print(
-        f"hero name {name_px}px role {role_px}px craft {craft_px}px "
-        f"ink-top {name_box[1]} craft-bottom {craft_box[3]}"
-    )
-    save_rgb(img, OUT / "hero.png")
-
-
-def make_contents(scratch: ImageDraw.ImageDraw) -> None:
-    """Horizontal index: NeuOptic, then Arvi and NeoEngine side by side.
-
-    Page-colored ground — a typeset band, not a second nameplate.
-    """
-    kicker_px = 64
-    title_px = 104
-    desc_px = 36
-    url_px = 26
-    gutter = 48
-    col_w = (MEASURE - gutter) // 2
-    col2_x = X + col_w + gutter
-
-    kicker_f = font("Fraunces-SemiBold.ttf", kicker_px)
-    title_f = font("InstrumentSerif-Regular.ttf", title_px)
-    desc_f = font("SourceSans3-Regular.ttf", desc_px)
-    url_f = font("SourceSans3-Regular.ttf", url_px)
-
-    # Hand-broken so each column is two full lines, not a stranded last word.
+    place = "Bengaluru"
+    kicker = "NeuOptic"
+    site = "neuoptic.in"
     entries = [
         (
             "Arvi",
@@ -242,117 +205,187 @@ def make_contents(scratch: ImageDraw.ImageDraw) -> None:
             ],
         ),
     ]
-    wrapped = [lines for _, lines in entries]
-    for lines in wrapped:
+    word = "VOXORYL"
+    sentence = [
+        "Local-first voice desktop companion —",
+        "on-device reasoning, private memory.",
+    ]
+    repo = "github.com/vishalgaur1/VOXORYL"
+
+    name_f = font("InstrumentSerif-Regular.ttf", NAME_PX)
+    role_f = font("InstrumentSerif-Italic.ttf", ROLE_PX)
+    craft_f = font("SourceSans3-Regular.ttf", CRAFT_PX)
+    place_f = font("SourceSans3-Regular.ttf", PLACE_PX)
+    kicker_f = font("Fraunces-SemiBold.ttf", KICKER_PX)
+    title_f = font("InstrumentSerif-Regular.ttf", TITLE_PX)
+    desc_f = font("SourceSans3-Regular.ttf", DESC_PX)
+    word_f = font("Fraunces-SemiBold.ttf", WORD_PX)
+    url_f = font("SourceSans3-Regular.ttf", URL_PX)
+
+    name_w, name_h = ink_size(scratch, name, name_f)
+    role_w, role_h = ink_size(scratch, role, role_f)
+    craft_w, craft_h = ink_size(scratch, craft, craft_f)
+    place_w, place_h = ink_size(scratch, place, place_f)
+    kicker_w, kicker_h = ink_size(scratch, kicker, kicker_f)
+    site_w, site_h = ink_size(scratch, site, url_f)
+    title_h = max(ink_size(scratch, title, title_f)[1] for title, _ in entries)
+    desc_line_h = ink_size(scratch, "Ag", desc_f)[1]
+    desc_gap = 10
+    desc_h = desc_line_h * 2 + desc_gap
+    word_w, word_h = ink_size(scratch, word, word_f)
+    word_gap = 48
+    sent_x = X + word_w + word_gap
+    sent_measure = RIGHT - sent_x
+    longer = max(sentence, key=len)
+    sent_px = fit_size(scratch, "SourceSans3-Regular.ttf", longer, sent_measure, SENT_PX_MIN, SENT_PX_MAX)
+    sent_f = font("SourceSans3-Regular.ttf", sent_px)
+    sent_line_h = ink_size(scratch, sentence[0], sent_f)[1]
+    sent_gap = 8
+    sent_h = sent_line_h * 2 + sent_gap
+    repo_w, repo_h = ink_size(scratch, repo, url_f)
+
+    gutter = 56
+    col_w = (MEASURE - gutter) // 2
+    col2_x = X + col_w + gutter
+    for title, lines in entries:
+        tw, _ = ink_size(scratch, title, title_f)
+        assert tw <= col_w, f"{title} is {tw}px in a {col_w}px column"
         for line in lines:
             lw, _ = ink_size(scratch, line, desc_f)
             assert lw <= col_w, f"{line!r} is {lw}px in a {col_w}px column"
 
-    title_h = max(ink_size(scratch, title, title_f)[1] for title, _ in entries)
-    line_h = ink_size(scratch, "Ag", desc_f)[1]
-    desc_h = max(len(lines) * line_h + (len(lines) - 1) * 12 for lines in wrapped)
-    kicker_h = ink_size(scratch, "NeuOptic", kicker_f)[1]
+    for line in sentence:
+        sw, _ = ink_size(scratch, line, sent_f)
+        assert sw <= sent_measure, f"{line!r} is {sw}px beside the word ({sent_measure}px)"
+    assert repo_w <= sent_measure, f"repo url {repo_w}px > {sent_measure}px"
 
-    top = 64
-    gap_after_kicker = 22
-    gap_after_rule = 36
-    gap_title_desc = 22
-    bottom = 64
-    h = (
-        top
-        + kicker_h
-        + gap_after_kicker
-        + 1
-        + gap_after_rule
-        + title_h
-        + gap_title_desc
-        + desc_h
-        + bottom
+    assert 72 <= NAME_PX <= 96, NAME_PX
+    assert name_w <= MEASURE and role_w <= MEASURE and craft_w <= MEASURE
+    assert name_w + 32 + place_w <= MEASURE, "name collides with Bengaluru"
+    assert kicker_w + 32 + site_w <= MEASURE, "NeuOptic collides with its url"
+
+    # Upper band — identity and NeuOptic. Padding is real, the field is still full.
+    top = 56
+    gap_name_role = 16
+    gap_role_craft = 12
+    gap_craft_rule = 32
+    gap_rule_kicker = 28
+    gap_kicker_title = 24
+    gap_title_desc = 12
+    gap_desc_rule = 28
+    gap_rule_split = 26
+
+    y = top
+    name_top = y
+    y = name_top + name_h + gap_name_role
+    role_top = y
+    y = role_top + role_h + gap_role_craft
+    craft_top = y
+    y = craft_top + craft_h + gap_craft_rule
+    rule1 = y
+    y = rule1 + 1 + gap_rule_kicker
+    kicker_top = y
+    y = kicker_top + kicker_h + gap_kicker_title
+    title_top = y
+    desc_top = title_top + title_h + gap_title_desc
+    y = desc_top + desc_h + gap_desc_rule
+    rule2 = y
+    split = rule2 + 1 + gap_rule_split
+
+    # Lower band — VOXORYL beside its sentence, not a lone poster word.
+    gap_split_word = 28
+    sent_url_gap = 14
+    bottom = 48
+    block_h = sent_h + sent_url_gap + repo_h
+    band_h = max(word_h, block_h)
+    word_top = split + gap_split_word + max(0, (band_h - word_h) // 2)
+    sent_top = split + gap_split_word + max(0, (band_h - block_h) // 2)
+    h = split + gap_split_word + band_h + bottom
+
+    img = make_field(W, h)
+    draw = ImageDraw.Draw(img)
+
+    name_box = draw_ink(draw, (X, name_top), name, name_f, INK)
+    place_box = draw_ink(
+        draw,
+        (RIGHT - place_w, name_box[3] - place_h),
+        place,
+        place_f,
+        META,
+    )
+    role_box = draw_ink(draw, (X, role_top), role, role_f, ROLE_C)
+    craft_box = draw_ink(draw, (X, craft_top), craft, craft_f, CRAFT_C)
+    draw.line([(X, rule1), (RIGHT, rule1)], fill=RULE, width=1)
+
+    kicker_box = draw_ink(draw, (X, kicker_top), kicker, kicker_f, INK)
+    site_box = draw_ink(
+        draw,
+        (RIGHT - site_w, kicker_box[3] - site_h),
+        site,
+        url_f,
+        META,
     )
 
-    img = Image.new("RGB", (W, h), PAGE)
-    draw = ImageDraw.Draw(img)
-
-    kicker = draw_ink(draw, (X, top), "NeuOptic", kicker_f, INK)
-    url = "neuoptic.in"
-    url_w, url_h = ink_size(scratch, url, url_f)
-    url_y = kicker[1] + max(0, (kicker_h - url_h) // 2)
-    draw_ink(draw, (RIGHT - url_w, url_y), url, url_f, META)
-
-    rule_y = kicker[3] + gap_after_kicker
-    draw.line([(X, rule_y), (RIGHT, rule_y)], fill=RULE, width=1)
-
-    title_top = rule_y + gap_after_rule
-    desc_top = title_top + title_h + gap_title_desc
     split_x = X + col_w + gutter // 2
-    draw.line([(split_x, title_top), (split_x, title_top + title_h + gap_title_desc + desc_h)], fill=RULE, width=1)
+    draw.line([(split_x, title_top), (split_x, desc_top + desc_h)], fill=RULE, width=1)
 
-    bottoms = []
-    for (title, _), lines, col_x in zip(entries, wrapped, (X, col2_x)):
+    desc_bottoms = []
+    for (title, lines), col_x in zip(entries, (X, col2_x)):
         title_box = draw_ink(draw, (col_x, title_top), title, title_f, INK)
-        assert title_box[2] <= col_x + col_w, f"{title} overflows column"
-        box = draw_lines(draw, (col_x, desc_top), lines, desc_f, BODY, 12)
-        assert box[2] <= col_x + col_w + 2, f"desc overflows: {lines}"
-        bottoms.append(box[3])
+        assert title_box[2] <= col_x + col_w
+        box = draw_lines(draw, (col_x, desc_top), lines, desc_f, BODY, desc_gap)
+        assert box[2] <= col_x + col_w + 1, lines
+        desc_bottoms.append(box[3])
 
-    assert kicker_px >= 32 and title_px >= 32 and desc_px >= 32
-    assert max(bottoms) <= h - 48
-    print(f"contents {W}x{h} titles {title_px}px body {desc_px}px cols {col_w}px")
-    print("  " + " | ".join(" / ".join(lines) for lines in wrapped))
-    save_rgb(img, OUT / "contents.png")
+    draw.line([(X, rule2), (RIGHT, rule2)], fill=RULE, width=1)
 
+    word_box = draw_ink(draw, (X, word_top), word, word_f, INK)
+    sent_box = draw_lines(draw, (sent_x, sent_top), sentence, sent_f, BODY, sent_gap)
+    repo_box = draw_ink(draw, (sent_x, sent_box[3] + sent_url_gap), repo, url_f, META)
 
-def make_voxoryl(scratch: ImageDraw.ImageDraw) -> None:
-    """Large word, one sentence. No rule, no second plate."""
-    word = "VOXORYL"
-    # One sentence, broken to the measure so the line can stay large.
-    sentence_lines = [
-        "Local-first voice desktop companion —",
-        "on-device reasoning, private memory.",
-    ]
-    url = "github.com/vishalgaur1/VOXORYL"
+    # Collisions and empty-void guards.
+    assert name_box[2] < place_box[0] - 24
+    assert role_box[1] >= name_box[3] + 12
+    assert craft_box[1] >= role_box[3] + 8
+    assert kicker_box[1] >= rule1 + 20
+    assert kicker_box[2] < site_box[0] - 24
+    assert min(desc_bottoms) >= title_top + title_h + 8
+    assert word_box[2] < sent_box[0] - 24
+    assert repo_box[3] <= h - 36
+    assert name_box[1] >= 40
+    assert split < h * 0.82, "lower band is a sliver"
+    # Content should occupy the frame: padding is allowed, a poster void is not.
+    assert h <= 860, f"canvas {h}px is too tall for this much copy"
+    assert h >= 640, f"canvas {h}px is too short to breathe"
+    content_top = name_box[1]
+    content_bottom = repo_box[3]
+    assert (content_bottom - content_top) >= int(h * 0.72)
 
-    word_px = fit_size(scratch, "Fraunces-SemiBold.ttf", word, MEASURE, 96, 320)
-    sent_px = 64
-    url_px = 26
+    tl = img.getpixel((2, 2))
+    br = img.getpixel((W - 3, h - 3))
+    assert tl[2] >= tl[0] and tl[1] < 28, f"top-left is not navy {tl}"
+    assert br[1] > tl[1] + 18, f"gradient did not move toward green {tl} -> {br}"
 
-    word_f = font("Fraunces-SemiBold.ttf", word_px)
-    sent_f = font("SourceSans3-Regular.ttf", sent_px)
-    url_f = font("SourceSans3-Regular.ttf", url_px)
-
-    for line in sentence_lines:
-        sw, _ = ink_size(scratch, line, sent_f)
-        assert sw <= MEASURE, f"sentence line {sw}px > {MEASURE}"
-
-    word_h = ink_size(scratch, word, word_f)[1]
-    sent_line_h = ink_size(scratch, sentence_lines[0], sent_f)[1]
-    sent_gap = 14
-    sent_h = sent_line_h * 2 + sent_gap
-    url_h = ink_size(scratch, url, url_f)[1]
-
-    top = 80
-    gap_word = 40
-    gap_url = 28
-    bottom = 72
-    h = top + word_h + gap_word + sent_h + gap_url + url_h + bottom
-
-    img = Image.new("RGB", (W, h), PAGE)
-    draw = ImageDraw.Draw(img)
-
-    word_box = draw_ink(draw, (X, top), word, word_f, INK)
-    sent_box = draw_lines(draw, (X, word_box[3] + gap_word), sentence_lines, sent_f, BODY, sent_gap)
-    draw_ink(draw, (X, sent_box[3] + gap_url), url, url_f, META)
-
-    assert word_px >= 96 and sent_px >= 32
-    assert word_box[2] <= RIGHT + 1
-    assert sent_box[2] <= RIGHT + 1
-    assert sent_box[1] - word_box[3] >= 28
-    print(f"voxoryl word {word_px}px sentence {sent_px}px canvas {W}x{h}")
-    save_rgb(img, OUT / "voxoryl.png")
+    upper = img.crop((0, 0, W, split))
+    lower = img.crop((0, split, W, h))
+    save_rgb(upper, OUT / "banner.png")
+    save_rgb(lower, OUT / "voxoryl.png")
+    print(
+        f"name {NAME_PX}px ({name_w}px wide) role {ROLE_PX}px craft {CRAFT_PX}px "
+        f"word {WORD_PX}px sentence {sent_px}px canvas {W}x{h} split {split}"
+    )
+    print(f"corners tl={tl} br={br}")
+    for py in (0.05, 0.35, 0.65, 0.95):
+        row = []
+        for px in (0.02, 0.5, 0.98):
+            row.append(img.getpixel((int(px * (W - 1)), int(py * (h - 1)))))
+        print(f"  y={py:.2f} {row}")
 
 
 def retire_stale() -> None:
     for stale in (
+        "hero.png",
+        "contents.png",
         "neuoptic.png",
         "featured.png",
         "focus.png",
@@ -360,7 +393,6 @@ def retire_stale() -> None:
         "divider.svg",
         "typing-voxoryl.png",
         "typing-voxoryl.svg",
-        "banner.png",
     ):
         p = OUT / stale
         if p.exists():
@@ -370,11 +402,8 @@ def retire_stale() -> None:
 
 def main() -> None:
     ensure_fonts()
-    scratch_img = Image.new("RGB", (8, 8))
-    scratch = ImageDraw.Draw(scratch_img)
-    make_hero(scratch)
-    make_contents(scratch)
-    make_voxoryl(scratch)
+    scratch = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    compose(scratch)
     retire_stale()
 
 
