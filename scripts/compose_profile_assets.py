@@ -177,7 +177,8 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
         ),
         "arvi": (
             "Arvi — web AR catalogues for restaurants, furniture, textiles, "
-            "and other products. Built to stay light so they run smoothly on a phone."
+            "and more, powered by a custom 3D rendering stack. Light enough "
+            "for phones; live with real shops and their customers."
         ),
         "neo": (
             "NeoEngine — staff operations: reminders, workflows, attendance, "
@@ -189,8 +190,8 @@ def compose(metrics: ImageDraw.ImageDraw) -> Image.Image:
             "memory private, and can open apps and help control the computer with your voice."
         ),
         "why": (
-            "I care about tools that run on-device and actually do work — "
-            "software people use, not only demos."
+            "The products are live. Real users. Paying customers. "
+            "I build systems that ship and stay up."
         ),
         "now": "Links if you want to dig in.",
     }
